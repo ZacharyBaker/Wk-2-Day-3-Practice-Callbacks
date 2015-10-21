@@ -74,6 +74,10 @@ last(names, function(lastName){
 
 
   //Code Here for multiply
+function multiply(num1, num2, cb){
+  cb(num1 * num2);
+}
+
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -90,8 +94,19 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
+function contains(arr, item, cb){
+  var result;
+  for (var i = 0; i < arr.length; i++){
+    if (arr[i] === item){
+    return cb(true);
+    }
+  } 
+  cb(false);
+}
 
-var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+
+
+var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Colt', 'Colt', 'Colt', 'Blaine', 'Cahlan'];
 contains(names, 'Colt', function(result){
   if(result === true){
     console.log('Colt is in the array');
@@ -110,6 +125,44 @@ contains(names, 'Colt', function(result){
 
 
     //Code Here for uniq
+function uniq(arr, cb){
+  arr.sort();
+  for (var i = 0; i < arr.length; i++){
+    if (arr[i] === arr[i + 1]){
+      arr.splice(i+1, 1);
+    }
+  }
+  cb(arr);
+}
+
+
+//-----------------------------------------
+// function uniq(arr, cb){
+//  var newArr = [];
+//   for (var i =arr.length - 1; i > 0; i--){
+//     for (var j = arr.length - 2; j > 0; j--){
+//       if (arr[i] === arr[j]){
+//         arr.splice(j, 1);
+//       }
+//     }
+//   }
+//   newArr = arr;
+//   cb(newArr);
+// }
+//--------------------------------------------
+
+function uniq(arr, cb){
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++){
+    if (newArr.indexOf(arr[i]) === -1){
+      newArr.push(arr[i]);
+    }
+  }
+  cb(newArr);
+}
+
+
+
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
@@ -127,6 +180,13 @@ uniq(names, function(uniqArr){
 
     //Code Here for each
 
+function each(arrNam, cb){
+  for (var i = 0; i < arrNam.length; i++){
+    cb(arrNam[i], i);
+  }
+}
+
+
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
@@ -143,6 +203,14 @@ each(names, function(item, indice){
 
 
  //code here for getUserById
+function getUserById(arr, varId, cb){
+  for (var i = 0; i < arr.length; i++){
+    if (arr[i].id === varId){
+     return cb(arr[i]);
+    }
+  }
+}
+
 
 var users = [
   {
@@ -168,3 +236,14 @@ var users = [
 getUserById(users, '16t', function(user){
   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
 });
+
+
+//---------------------------------------------
+
+var animal = {
+  name: "linx",
+  sayName: function(greeting){
+    alert(greeting + this.name);
+  }
+};
+
